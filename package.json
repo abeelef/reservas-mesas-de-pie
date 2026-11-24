@@ -1,1 +1,0 @@
-{"name":"reservas-mesas-de-pie","private":true,"type":"module","scripts":{"dev":"wrangler dev","deploy":"wrangler deploy","db:local":"wrangler d1 migrations apply DB --local","db:remote":"wrangler d1 migrations apply DB --remote","test":"node --test tests/worker.test.js"},"devDependencies":{"wrangler":"^4.0.0"}}
