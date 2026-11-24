@@ -24,3 +24,13 @@ python -m http.server 8000 --directory public
 Abre http://localhost:8000. Python solo sirve los archivos durante el desarrollo; no es necesario en Cloudflare. Para comprobarlo, guarda un turno, recarga la página y cancélalo. En otro navegador no aparecerá.
 
 Logo descargado de https://www.aqaia.com/wp-content/uploads/2020/02/cropped-Aqaia_color-1.png; la marca pertenece a Aqaia.
+
+## Si has creado el proyecto como Worker en Cloudflare
+
+También funciona como Worker que sirve únicamente archivos estáticos, sin API ni D1. `wrangler.jsonc` incluye nombre, fecha de compatibilidad y carpeta de archivos.
+
+- Build command: vacío.
+- Deploy command: `npx wrangler deploy` (también sirve el anterior `npx wrangler deploy --assets ./public`).
+- Preview builds: desactivado si no necesitas previsualizaciones.
+
+Tras actualizar el repositorio, despliega el último commit de `main`. Reintentar un build de un commit antiguo no incluye esta configuración.
