@@ -1,7 +1,53 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mesas de pie · Aqaia Igualada</title><link rel="stylesheet" href="style.css"></head><body>
-<header><a href="/" aria-label="Inicio"><img src="assets/aqaia.png" alt="Aqaia"></a><span class="location">IGUALADA <span class="sep">/</span> WORKSPACE</span><span class="header-note">Un espacio para todos</span></header>
-<main><section class="intro"><div><span class="eyebrow">MUÉVETE. CAMBIA DE PERSPECTIVA.</span><h1>Tu próxima idea,<br><em>de pie.</em></h1><p>Cuatro mesas. Un equipo. Reserva tu momento y deja sitio a la siguiente buena idea.</p></div><div class="intro-card"><span>EL ESPACIO SE COMPARTE</span><strong>4 mesas.<br>Muchas posibilidades.</strong><p>Hasta 2 horas al día por persona.<br>Un pequeño cambio para trabajar mejor.</p></div></section>
-<aside class="local-notice"><strong>Agenda local · sin sincronización</strong><p>Los datos se guardan solo en este navegador. No se comparten con la oficina ni garantizan la disponibilidad real de las mesas.</p></aside><section class="toolbar"><div><h2>Encuentra tu sitio</h2><p>Elige cuándo vienes y la mesa que prefieras.</p></div><label>Día de la reserva<input type="date" id="day" required></label></section>
-<div class="workspace"><section class="panel map-panel"><div class="panel-heading"><h3>Las mesas</h3><span>Vista desde arriba</span></div><div class="legend"><span>□ Disponible</span><span>▨ Ocupada en tu franja</span></div><div class="floor"><span class="floor-label">ZONA DE TRABAJO · IGUALADA</span><div class="desks" id="desks"></div><span class="floor-caption">Dos parejas de mesas, cara a cara</span></div><p class="hint">Selecciona una mesa para reservarla en la franja elegida.</p></section>
-<section class="panel booking-panel"><span class="eyebrow">HAZLO TUYO, POR UN RATO</span><h2 id="selection">Mesa 01</h2><p>Un cambio de postura sienta bien.</p><form id="booking"><label>Tu nombre<input name="name" id="name" placeholder="¿Cómo te llamas?" minlength="2" maxlength="60" required autocomplete="name"></label><div class="time-fields"><label>Desde<select id="start"></select></label><label>Hasta<select id="end"></select></label></div><div class="booking-info"><span>◷</span><div><strong>Un turno justo para todos</strong><small>De lunes a viernes, de 8:00 a 18:00.<br>Reservas con hasta 14 días de antelación.</small></div></div><button class="primary" id="submit">Guardar en mi agenda</button><p role="status" id="message" aria-live="polite"></p></form></section></div>
-<section class="panel agenda"><div class="panel-heading"><div><span class="eyebrow">ORGANÍZATE CON EL EQUIPO</span><h2>Reservas locales del día</h2></div><span id="count"></span></div><div id="reservations"></div></section><footer><span>Aqaia · Software Rocks</span><span>Trabajar a gusto también es compartir.</span></footer></main><script type="module" src="app.js"></script></body></html>
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#123b72">
+  <title>Mesas de pie · Aqaia Igualada</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <a href="/" class="brand" aria-label="Aqaia, inicio"><img src="assets/aqaia.png" alt="Aqaia"></a>
+  <span class="location">ESPACIOS <span>/</span> IGUALADA</span>
+  <a class="nav-link" href="#agenda">Mi agenda</a>
+  <span class="office-tag"><span aria-hidden="true">⌖</span> Oficina Igualada</span>
+</header>
+<main>
+  <section class="intro">
+    <div><span class="eyebrow">UN CAMBIO DE POSTURA. OTRA PERSPECTIVA.</span><h1>Haz sitio a tus <em>ideas.</em></h1><p>Elige una mesa, levántate un rato y cambia el ritmo de tu día.</p></div>
+    <div class="intro-detail"><span class="mini-desk" aria-hidden="true"></span><div><strong>4 mesas de pie</strong><span>Dos a dos. Cara a cara.</span></div></div>
+  </section>
+  <aside class="local-notice"><span class="notice-icon" aria-hidden="true">i</span><p><strong>Tu agenda, en este navegador.</strong> Las reservas no se comparten con el equipo ni confirman la disponibilidad real.</p><span class="local-badge">MODO LOCAL</span></aside>
+  <section class="toolbar"><div><span class="eyebrow">TU ESPACIO DE TRABAJO</span><h2>¿Dónde te pones hoy?</h2></div><label class="date-label" for="day">Día de la reserva<input type="date" id="day" required></label></section>
+  <div class="workspace">
+    <section class="panel map-panel" aria-labelledby="map-title">
+      <div class="panel-heading"><div><h3 id="map-title">Elige en el plano</h3><p>Cuatro sitios, una referencia: la salida.</p></div><span class="view-badge">VISTA SUPERIOR</span></div>
+      <div class="legend"><span><i class="legend-free"></i>Libre en tu agenda</span><span><i class="legend-selected"></i>Tu selección</span><span><i class="legend-busy"></i>Con reserva local</span></div>
+      <div class="floor" role="group" aria-label="Plano: mesas 01 y 02 en el lado interior; mesas 03 y 04 en el lado de la salida. Puerta detrás de la mesa 03, abajo a la izquierda.">
+        <div class="room-wall"><span>INTERIOR DE LA OFICINA</span></div>
+        <div class="side-label" aria-hidden="true">MESAS DE PIE</div>
+        <div class="desks" id="desks"></div>
+        <div class="exit-zone"><div class="door" aria-hidden="true"><svg viewBox="0 0 100 82"><path class="swing" d="M8 74 A66 66 0 0 1 74 8"/><path class="leaf" d="M8 74 L74 8"/><path class="frame" d="M0 74 H8 M78 74 H100"/></svg></div><div class="exit-caption"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 4H4v16h6M14 8l4 4-4 4M9 12h9"/></svg><span><strong>Puerta de salida</strong><small>Detrás de la mesa 03</small></span></div></div>
+      </div>
+      <div class="map-note"><span aria-hidden="true">⌖</span><p>La puerta te orienta: <strong>01 y 02, lado interior · 03 y 04, lado salida.</strong></p></div>
+    </section>
+    <section class="panel booking-panel" aria-labelledby="selection">
+      <div class="booking-top"><span class="eyebrow">TU PRÓXIMO SITIO</span><span class="selection-icon" aria-hidden="true">✓</span></div>
+      <h2 id="selection">Mesa 01</h2><p id="desk-location" class="desk-location">Lado interior · izquierda en el plano</p>
+      <div class="selected-summary"><span class="summary-line"></span><span id="selected-time">09:00 – 09:30</span><strong id="duration">30 min</strong></div>
+      <form id="booking"><label for="name">Tu nombre</label><input name="name" id="name" placeholder="Escribe tu nombre" minlength="2" maxlength="60" required autocomplete="name">
+        <div class="time-fields"><label>Desde<select id="start"></select></label><label>Hasta<select id="end"></select></label></div>
+        <div class="booking-info"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg><p><strong>Un rato para ti. Espacio para todos.</strong><span>Hasta 2 h por nombre y día en esta agenda.<br>Lunes a viernes · 08:00–18:00.</span></p></div>
+        <button class="primary" id="submit">Guardar en mi agenda <span aria-hidden="true">＋</span></button>
+        <p class="save-note">Guardado local, sin confirmar una reserva compartida.</p><p role="status" id="message" aria-live="polite"></p>
+      </form>
+    </section>
+  </div>
+  <section class="panel agenda" id="agenda"><div class="panel-heading"><div><span class="eyebrow">TU DÍA, CON OTRA PERSPECTIVA</span><h2>Mi agenda del día</h2></div><span id="count" class="count-badge"></span></div><div id="reservations"></div></section>
+  <footer><span>Aqaia <b>·</b> Software Rocks</span><span>Un espacio para cambiar de postura.</span><span>IGUALADA</span></footer>
+</main>
+<script type="module" src="app.js"></script>
+</body>
+</html>
